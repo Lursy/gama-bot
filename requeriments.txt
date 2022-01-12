@@ -1,0 +1,7 @@
+discord.py
+python-decouple
+youtube-dl
+requests
+pilow
+python-decouple
+gtts
