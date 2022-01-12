@@ -76,7 +76,7 @@ class RPG(commands.Cog):
                     if 'd' in item.casefold():
                         valores = item.split('d')
                         for c in range(0, int(valores[0])):
-                            dado[f'{c+1}° d{valores[1]} = '] = str(randint(1, int(valores[1])+1))
+                            dado[f'{c+1}° d{valores[1]} = '] = str(randint(1, int(valores[1])))
             card = discord.Embed(color=0x000000)
             for key, value in dado.items():
                 if len(dado) == 1:
