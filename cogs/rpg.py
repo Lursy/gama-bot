@@ -1,5 +1,5 @@
 from discord.ext import commands
-from gama.Imagens import image
+from gama-bot.Imagens import image
 import discord
 from random import randint
 
