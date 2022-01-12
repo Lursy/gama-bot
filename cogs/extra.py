@@ -29,7 +29,7 @@ class Extra(commands.Cog):
             if not ctx.voice_client.is_playing():
                 busca = gTTS(text=frase, lang=lang)
                 busca.save('musica.ogg')
-                ctx.voice_client.play(discord.FFmpegPCMAudio(r'C:\Users\mathe\PycharmProjects\pythonProject1\gama\musica.ogg'))
+                ctx.voice_client.play(discord.FFmpegPCMAudio(r'musica.ogg'))
 
 
 def setup(bot):
