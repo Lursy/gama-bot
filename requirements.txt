@@ -1,7 +1,8 @@
-discord.py
-python-decouple
-youtube-dl
-requests
-pillow
-python-decouple
-gtts
+discord==1.7.3
+discord.py==1.7.3
+ffmpeg==1.4
+gTTS==2.2.3
+Pillow==8.4.0
+python-decouple==3.5
+requests==2.26.0
+youtube-dl==2021.6.6
