@@ -3,4 +3,5 @@ python-decouple
 youtube-dl
 requests
 pillow
+python-decouple
 gtts
