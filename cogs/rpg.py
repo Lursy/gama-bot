@@ -70,7 +70,7 @@ class RPG(commands.Cog):
             dano = 0
             for item in dx:
                 if item.isnumeric():
-                    adicional['adicional: '] = item
+                    adicional['adicional: '] += item
                 else:
                     print('foi')
                     if 'd' in item.casefold():
