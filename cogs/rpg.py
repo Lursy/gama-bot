@@ -65,18 +65,18 @@ class RPG(commands.Cog):
             line = '━━━━━━━━━━━━━━━━━━━━━'
             dx = dados.replace(' ', '').split('+')
             vd = va = resultado = ''
-            adicional = {}
+            adicional = {'adicional: ': []}
             dado = {}
             dano = 0
             for item in dx:
                 if item.isnumeric():
-                    adicional['adicional: '] += int(item)
+                    adicional['adicional: '].append(item)
                 else:
                     print('foi')
                     if 'd' in item.casefold():
                         valores = item.split('d')
                         for c in range(0, int(valores[0])):
-                            dado[f'{c+1}° d{valores[1]} = '] = str(randint(1, int(valores[1])))
+                            dado[f'{c+1}° d{valores[1]} = '] = str(randint(1, int(valores[1])+1))
             card = discord.Embed(color=0x000000)
             for key, value in dado.items():
                 if len(dado) == 1:
@@ -91,16 +91,13 @@ class RPG(commands.Cog):
             vd += line
             card.add_field(name=f'Rolagem: {dados}', value=vd, inline=False)
             if adicional:
+                add = adicional['Adicional: ']
                 resultado += ' + '
-                for key, value in adicional.items():
-                    if len(adicional) == 1:
-                        va += key + value
-                        dano += int(value)
-                    else:
-                        va += f'{key + value}\n'
-                        dano += int(value)
+                for c, value in enumerate(adicional['Adicional: ']):
+                    dano += int(value[c])
+                va = f'Adicional: {dano}'
                 if len(dado) > 1:
-                    resultado += ' + '.join(adicional.values())
+                    resultado += ' + '.join(add)
                 va += '\n' + line
                 card.add_field(name=f'Adicionais', value=va, inline=False)
             resultado = f'{resultado} = {dano}'
