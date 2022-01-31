@@ -2,8 +2,6 @@ from discord.ext import commands
 from Imagens import image
 import discord
 from random import randint
-
-
 def resultado(p, v, d=20):
     normal = d+1 - p
     bom = d+1 - p//2
@@ -19,14 +17,10 @@ def resultado(p, v, d=20):
     if v >= extremo:
         response = 'Extremo'
     return response
-
-
 class RPG(commands.Cog):
     """Dados para rpg"""
-
     def __init__(self, bot):
         self.bot = bot
-
     @commands.command(msg='dado')
     async def dado(self, ctx, pericia='', dado='20'):
         name = f'{ctx.author.name}'
@@ -44,7 +38,6 @@ class RPG(commands.Cog):
             rst = f'Resultado: {resul}'
         image.imagens_pericia(nome=nome, valor=str(valor), pericia=prc, resultado=rst)
         await ctx.send(file=discord.File(r'Imagens/resultado.png'))
-
     @commands.command(msg='lista')
     async def lista(self, ctx, tam='20'):
         d = int(tam)
@@ -58,19 +51,18 @@ class RPG(commands.Cog):
             extremo = d + 1 - p // 5
             string += f'{p:<4}- N:{normal:<4} B:{bom:<4} E:{extremo:<4}\n'
         await ctx.send(string)
-
     @commands.command(msg='dano')
     async def dano(self, ctx, *, dados):
         try:
             line = '━━━━━━━━━━━━━━━━━━━━━'
             dx = dados.replace(' ', '').split('+')
             vd = va = resultado = ''
-            adicional = {'adicional: ': []}
+            adicional = {}
             dado = {}
             dano = 0
             for item in dx:
                 if item.isnumeric():
-                    adicional['adicional: '].append(item)
+                    adicional['adicional: '] = item
                 else:
                     print('foi')
                     if 'd' in item.casefold():
@@ -91,13 +83,16 @@ class RPG(commands.Cog):
             vd += line
             card.add_field(name=f'Rolagem: {dados}', value=vd, inline=False)
             if adicional:
-                add = adicional['Adicional: ']
                 resultado += ' + '
-                for c, value in enumerate(adicional['Adicional: ']):
-                    dano += int(value[c])
-                va = f'Adicional: {dano}'
+                for key, value in adicional.items():
+                    if len(adicional) == 1:
+                        va += key + value
+                        dano += int(value)
+                    else:
+                        va += f'{key + value}\n'
+                        dano += int(value)
                 if len(dado) > 1:
-                    resultado += ' + '.join(add)
+                    resultado += ' + '.join(adicional.values())
                 va += '\n' + line
                 card.add_field(name=f'Adicionais', value=va, inline=False)
             resultado = f'{resultado} = {dano}'
@@ -106,7 +101,5 @@ class RPG(commands.Cog):
             await ctx.send(embed=card)
         except Exception as error:
             await ctx.send(f'O parâmetro "{dados}" não foi aceito\nErro: "{error}"')
-
-
 def setup(bot):
     bot.add_cog(RPG(bot))
