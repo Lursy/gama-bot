@@ -29,6 +29,7 @@ class RPG(commands.Cog):
         if name.lower() != 'jgkill' and name.lower() != 'big chungus':
             valor2 = randint(1, dado)
             if valor2 > valor:
+                print(valor2, valor)
                 valor = valor2
         prc = rst = ''
         nome = f'Nome: {name}'
