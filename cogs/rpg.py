@@ -111,14 +111,9 @@ class RPG(commands.Cog):
                     tam = len(dano)
                 dano.insert(k, v)
 
-            vals = ''
-            for item in val.values():
-                for c, v in enumerate(item):
-                    vals += f'{c+1}° dado = {v}\n'
-
             response = f'\nResultado: {eval(" ".join(dano))}'
             card.add_field(name=f'Dados na mesa! Rolagem: {rolagem}', value=response, inline=False)
-            card.add_field(name=f'Valores', value=vals, inline=False)
+            card.add_field(name=f'Valores', value=" ".join(dano), inline=False)
             await ctx.send(embed=card)
         except Exception as error:
             await ctx.send(f'O parâmetro "{dano}" não foi aceito\nErro: "{error}"')
