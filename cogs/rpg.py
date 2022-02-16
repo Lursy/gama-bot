@@ -65,7 +65,7 @@ class RPG(commands.Cog):
         card = discord.Embed(color=0x000000)
         try:
             import random
-            dano = dano.replace('*', '×')
+
             rolagem = dano
             val = {}
             sinais = {}
@@ -111,7 +111,7 @@ class RPG(commands.Cog):
                     tam = len(dano)
                 dano.insert(k, v)
 
-            card.add_field(name=f'Dados na mesa!', value=f"{rolagem}\n"+"".join(dano) + f' = {eval(" ".join(dano.replace('×', '*')))}', inline=False)
+            card.add_field(name=f'Dados na mesa!', value=f"{rolagem.replace('*', '×')}\n"+"".join(dano.replace('*', '×')) + f' = {eval(" ".join(dano))}', inline=False)
             await ctx.send(embed=card)
         except Exception as error:
             await ctx.send(f'O parâmetro "{dano}" não foi aceito\nErro: "{error}"')
