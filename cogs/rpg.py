@@ -65,12 +65,11 @@ class RPG(commands.Cog):
         card = discord.Embed(color=0x000000)
         try:
             import random
-
+            dano = dano.replace(' ', '')
             rolagem = dano
             val = {}
             sinais = {}
             cont = 0
-            dano = dano.replace(' ', '')
 
             for c, item in enumerate(dano):
                 if not item.isalnum():
