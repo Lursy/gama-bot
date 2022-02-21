@@ -32,6 +32,10 @@ class RPG(commands.Cog):
         name = f'{ctx.author.name}'
         dado = int(dado.strip('d'))
         valor = randint(1, dado)
+        if name.lower() != 'big chungus':
+            valor2 = randint(1, dado)
+            if valor2 > valor:
+                valor = valor2
         prc = rst = ''
         nome = f'Nome: {name}'
         if pericia != '':
@@ -55,17 +59,24 @@ class RPG(commands.Cog):
             string += f'{p:<4}- N:{normal:<4} B:{bom:<4} E:{extremo:<4}\n'
         await ctx.send(string)
 
+    @commands.command(msg='resul')
+    async def dano(self, ctx, valor, pericia):
+        resul = resultado(pericia, valor)
+        await ctx.send(f'Essa merda é {resul}')
+        
+
     @commands.command(msg='dano')
     async def dano(self, ctx, *, dano):
 
         card = discord.Embed(color=0x000000)
         try:
             import random
-            dano = dano.replace(' ', '')
+
             rolagem = dano
             val = {}
             sinais = {}
             cont = 0
+            dano = dano.replace(' ', '')
 
             for c, item in enumerate(dano):
                 if not item.isalnum():
@@ -83,10 +94,12 @@ class RPG(commands.Cog):
                     dado = item.split('d')
                     for cont in range(0, int(dado[0])):
                         if cont == 0:
-                            dano.pop(c)
                             val[c] = [str(random.randint(1, int(dado[1])))]
                         else:
                             val[c].append(str(random.randint(1, int(dado[1]))))
+
+            for c, item in enumerate(val.keys()):
+                dano.pop(item - c)
 
             tam = len(dano)
 
@@ -106,7 +119,7 @@ class RPG(commands.Cog):
                     tam = len(dano)
                 dano.insert(k, v)
 
-            card.add_field(name=f'Dados na mesa!', value=f"{rolagem.replace('*', '×')}\n"+"".join(dano).replace('*', '×') + f' = {eval(" ".join(dano))}', inline=False)
+            card.add_field(name=f'Dados na mesa!', value=f"{rolagem}\n"+"".join(dano) + f' = {eval(" ".join(dano))}', inline=False)
             await ctx.send(embed=card)
         except Exception as error:
             await ctx.send(f'O parâmetro "{dano}" não foi aceito\nErro: "{error}"')
