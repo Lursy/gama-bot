@@ -60,10 +60,9 @@ class RPG(commands.Cog):
         await ctx.send(string)
 
     @commands.command(msg='resul')
-    async def dano(self, ctx, valor, pericia):
-        resul = resultado(pericia, valor)
+    async def resul(self, ctx, v, p):
+        resul = resultado(p, v)
         await ctx.send(f'Essa merda é {resul}')
-        
 
     @commands.command(msg='dano')
     async def dano(self, ctx, *, dano):
@@ -119,7 +118,7 @@ class RPG(commands.Cog):
                     tam = len(dano)
                 dano.insert(k, v)
 
-            card.add_field(name=f'Dados na mesa!', value=f"{rolagem}\n"+"".join(dano) + f' = {eval(" ".join(dano))}', inline=False)
+            card.add_field(name=f'Dados na mesa!', value=f"{rolagem.replace('*', 'x')}\n"+"".join(dano) + f' = {eval(" ".join(dano))}', inline=False)
             await ctx.send(embed=card)
         except Exception as error:
             await ctx.send(f'O parâmetro "{dano}" não foi aceito\nErro: "{error}"')
