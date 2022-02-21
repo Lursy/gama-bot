@@ -32,10 +32,6 @@ class RPG(commands.Cog):
         name = f'{ctx.author.name}'
         dado = int(dado.strip('d'))
         valor = randint(1, dado)
-        if name.lower() != 'big chungus':
-            valor2 = randint(1, dado)
-            if valor2 > valor:
-                valor = valor2
         prc = rst = ''
         nome = f'Nome: {name}'
         if pericia != '':
