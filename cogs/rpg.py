@@ -47,8 +47,8 @@ class RPG(commands.Cog):
         string = ''
         for p in range(1, 21):
             normal = d + 1 - per
-            bom = normal + (per + 1) // 2
-            extremo = d + 1 - per // 5
+            bom = d+1 - per// 2
+            extremo = d+1 - per // 5
             string += f'{p:<4}- N:{normal:<4} B:{bom:<4} E:{extremo:<4}\n'
         await ctx.send(string)
 
