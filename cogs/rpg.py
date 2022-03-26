@@ -46,9 +46,8 @@ class RPG(commands.Cog):
         per = int(per)
         normal = 21 - per
         bom = 21 - per//2
-        extremo = 21  - per//5
-        string = f'N:{normal:<4} B:{bom:<4} E:{extremo:<4}\n'
-        await ctx.send(string)
+        extremo = 21  - per//5 
+        await ctx.send(f'N:{normal:<4} B:{bom:<4} E:{extremo:<4}\n')
 
     @commands.command(msg='resul')
     async def resul(self, ctx, v, p):
