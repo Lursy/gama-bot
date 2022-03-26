@@ -43,12 +43,13 @@ class RPG(commands.Cog):
 
     @commands.command(msg='lista')
     async def lista(self, ctx, per):
+        per = int(per)
         string = ''
-        for p in range(1, 21):
+        for i in range(1, 21):
             normal = 21 - per
             bom = 21 - per//2
             extremo = 21 - per//5
-            string += f'{p:<4}- N:{normal:<4} B:{bom:<4} E:{extremo:<4}\n'
+            string += f'{i:<4}- N:{normal:<4} B:{bom:<4} E:{extremo:<4}\n'
         await ctx.send(string)
 
     @commands.command(msg='resul')
