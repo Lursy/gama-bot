@@ -42,11 +42,9 @@ class RPG(commands.Cog):
         await ctx.send(file=discord.File(r'Imagens/resultado.png'))
 
     @commands.command(msg='lista')
-    async def lista(self, ctx, tam='20'):
-        d = int(tam)
-        if d > 70:
-            await ctx.send('Quantidade de caracteres não suportada')
-            return 0
+    async def lista(self, ctx, per):
+        tam='20'
+        d = per
         string = ''
         for p in range(1, int(d) + 1):
             normal = d + 1 - p
