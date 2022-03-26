@@ -41,7 +41,7 @@ class RPG(commands.Cog):
         image.imagens_pericia(nome=nome, valor=str(valor), pericia=prc, resultado=rst)
         await ctx.send(file=discord.File(r'Imagens/resultado.png'))
 
-    @commands.command(msg='lista')
+    @commands.command(msg='resul')
     async def lista(self, ctx, per):
         per = int(per)
         string = ''
