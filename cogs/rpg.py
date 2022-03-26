@@ -43,8 +43,7 @@ class RPG(commands.Cog):
 
     @commands.command(msg='lista')
     async def lista(self, ctx, per):
-        tam='20'
-        d = per
+        d = int(per)
         string = ''
         for p in range(1, int(d) + 1):
             normal = d + 1 - p
