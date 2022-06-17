@@ -9,8 +9,11 @@ def check_queue(ctx, guild):
     if queues[guild]:
         client_voice = ctx.voice_client
         source = queues[guild].pop(0)
-        client_voice.play(source, after=lambda x: check_queue(ctx, guild))
-        client_voice.is_playing()
+        try:
+            client_voice.play(source, after=lambda x: check_queue(ctx, guild))
+            client_voice.is_playing()
+        except:
+            pass
 
 
 def search(query):
