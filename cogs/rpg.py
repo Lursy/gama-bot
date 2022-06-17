@@ -60,7 +60,7 @@ class RPG(commands.Cog):
         card = discord.Embed(color=0x000000)
         try:
             import random
-
+            valores = ''
             rolagem = dano
             val = {}
             sinais = {}
@@ -74,6 +74,7 @@ class RPG(commands.Cog):
                         dano = dano.replace(item, ',')
                     else:
                         dano = dano[1:]
+                    print(item)
                     sinais[cont] = item
 
             dano = dano.split(',')
@@ -82,10 +83,13 @@ class RPG(commands.Cog):
                 if 'd' in item:
                     dado = item.split('d')
                     for cont in range(0, int(dado[0])):
+                        gerado = str(random.randint(1, int(dado[1])))
+                        valores += f'{cont + 1}° d{dado[1]}: {gerado}\n'
                         if cont == 0:
-                            val[c] = [str(random.randint(1, int(dado[1])))]
+                            val[c] = [gerado]
                         else:
-                            val[c].append(str(random.randint(1, int(dado[1]))))
+                            val[c].append(gerado)
+                        print("VAL:", val)
 
             for c, item in enumerate(val.keys()):
                 dano.pop(item - c)
@@ -108,7 +112,7 @@ class RPG(commands.Cog):
                     tam = len(dano)
                 dano.insert(k, v)
 
-            card.add_field(name=f'Dados na mesa!', value=f"{rolagem.replace('*', 'x')}\n"+"".join(dano).replace('*', 'x') + f' = {eval(" ".join(dano))}', inline=False)
+            card.add_field(name=f'Dados na mesa!', value=f"{rolagem.replace('*', 'x')}\n\n" + valores + "\n" + "".join(dano).replace('*', 'x') + f' = {eval(" ".join(dano))}', inline=False)
             await ctx.send(embed=card)
         except Exception as error:
             await ctx.send(f'O parâmetro "{dano}" não foi aceito\nErro: "{error}"')
