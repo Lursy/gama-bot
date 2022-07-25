@@ -49,11 +49,6 @@ class RPG(commands.Cog):
         extremo = 21  - per//5 
         await ctx.send(f'N:{normal:<4} B:{bom:<4} E:{extremo:<4}\n')
 
-    @commands.command(msg='resul')
-    async def resul(self, ctx, v, p):
-        resul = resultado(p, v)
-        await ctx.send(f'Essa merda é {resul}')
-
     @commands.command(msg='dano')
     async def dano(self, ctx, *, dano):
 
