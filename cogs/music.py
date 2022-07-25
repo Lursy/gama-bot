@@ -46,8 +46,8 @@ class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(msg='run')
-    async def run(self, ctx, *, music):
+    @commands.command(msg='play')
+    async def play(self, ctx, *, music):
         server = ctx.message.guild
         video = search(music)
         member_voice = ctx.author.voice
