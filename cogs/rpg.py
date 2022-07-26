@@ -127,12 +127,7 @@ class RPG(commands.Cog):
     async def dado(self, ctx, pericia='', dado='20'):
         name = f'{ctx.author.name}'
         dado = int(dado.strip('d'))
-        valor2 = randint(1, dado)
         valor = randint(1, dado)
-        print(valor2, valor)
-        if name == 'Lursy':
-            if valor2-2 > valor:
-                valor = valor2-2
         prc = rst = ''
         nome = f'Nome: {name}'
         if pericia != '':
