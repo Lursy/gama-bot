@@ -10,8 +10,8 @@ class Extras(commands.Cog):
     @app_commands.command(name='clear', description="Limpa as mensagens do chat")
     async def cls(self, interaction: discord.Interaction, quantidade: int=500):
         ctx = await self.bot.get_context(interaction)
-        await ctx.channel.purge(limit=quantidade)
         await ctx.send(content="Apagando mensagens...", ephemeral=True)
+        await ctx.channel.purge(limit=quantidade)
 
 
 async def setup(bot):
